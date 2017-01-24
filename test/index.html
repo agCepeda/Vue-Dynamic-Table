@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vue Dynamic Table - Test</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+	
+	<div class="container" id="test-component">
+		<div class="row">
+			<div class="col-md-12">
+				<h1>Test Dynamic Tables</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">
+				<ul>
+					<li v-for="column in myColumns">
+						<input type="checkbox" v-model="column.visible"><label for="">{{ column.title }}</label>
+					</li>
+				</ul>
+				<button type="button" class="btn btn-success expand" v-on:click="addRow">Add Row</button>
+				<button type="button" class="btn btn-success expand" v-on:click="testModel">Test</button>
+			</div>
+			<div class="col-md-10">
+				<vue-dynamic-table
+					class-name="table table-bordered table-hover"
+				    v-bind:columns="myColumns"
+				    v-bind:data-model="myDataModel">
+				</vue-dynamic-table>
+				<h3>Total: {{ total }}</h3>
+			</div>
+		</div>
+	</div>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.js"></script>
+	<script type="text/javascript" src="../vue-dynamic-table.js"></script>
+	<script type="text/javascript">
+		var TestComponent = new Vue({
+			el: '#test-component',
+			data: {
+		    	myColumns: [
+		        	{ name:'col1', title:'Column 1', visible: true },
+		        	{ name:'col2', title:'Column 2', visible: true },
+		        	{ name:'col3', title:'Column 3', visible: true },
+		        	{ name:'col4', title:'Column 4', visible: true },
+		        	{ name:'cost', title:'Column 4', visible: true },
+		        	{ name:'cost', title: 'Costo', visible: true, 
+		        		input: {
+		        			inputClass: 'form-control input-int'
+		        		} 
+		        	},
+		        	{ name:'', title: 'SubTotal', visible: true, 
+		        		customRender: function(row) {
+		        			return row.cost * row.cost;
+		        		} 
+		        	},
+		        	{ name:'r', title:'Checkbox', visible: true, 
+		        		check: {
+		        			checkClass: 'form-control'
+		        		}
+		        	},
+		        	{ name:'n', title:'Select', visible: true, 
+		        		select: {
+		        			selectClass: 'form-control',
+		        			selectOptions: [ { value:1, text: 'Tu mama' }, { value:1, text: 'Tu hermana' } ]
+		        		}
+		        	}
+		        ],
+		        myDataModel: [
+		        	{ col1: 'Value 1, 1', col2: 'Value 1, 2', col3: 'Value 1, 3', col4: 'Value 1, 4', cost: 10 },
+		        	{ col1: 'Value 2, 1', col2: 'Value 2, 2', col3: 'Value 2, 3', col4: 'Value 2, 4', cost: 12 },
+		        	{ col1: 'Value 3, 1', col2: 'Value 3, 2', col3: 'Value 3, 3', col4: 'Value 3, 4', cost: 5 },
+		        	{ col1: 'Value 4, 1', col2: 'Value 4, 2', col3: 'Value 4, 3', col4: 'Value 4, 4', cost: 11 }
+		        ]
+		    },
+		    methods: {
+		    	addRow: function() {
+		    		this.myDataModel.push({ cost: 0 });
+		    	},
+		    	testModel: function() {
+		    		console.log(JSON.stringify(this.myDataModel));	
+		    	}
+		    },
+		    computed: {
+		    	total: function() {
+		    		var total = 0;
+		    		for (var i = 0; i < this.myDataModel.length; i++) {
+		    			total += this.myDataModel[i].cost != null ? parseInt(this.myDataModel[i].cost) : 0;
+		    		}
+		    		return total;
+		    	}
+		    }
+		});
+	</script>
+</body>
+</html>
