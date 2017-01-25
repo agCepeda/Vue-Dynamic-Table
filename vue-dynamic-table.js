@@ -161,7 +161,7 @@ Vue.component('vue-dynamic-table', {
 						<div v-html="column.customRender(row)"></div>\
 					</template>\
 					<template v-else-if="column.actionLink != null">\
-						<a v-bind:class="column.actionLink.linkClass" v-on:click="linkEvent(index, row, column)"><span v-bind:class="column.actionLink.iconClass"></span> {{ column.actionLink.text }}</a>\
+						<a role="button" v-bind:class="column.actionLink.linkClass" v-on:click="linkEvent(index, row, column)"><span v-bind:class="column.actionLink.iconClass"></span> {{ column.actionLink.text }}</a>\
 					</template>\
 					<template v-else-if="column.actionButton != null">\
 						<button type="button" v-bind:class="column.actionButton.buttonClass" v-on:click="buttonEvent(index, row, column)"><span v-bind:class="column.actionButton.iconClass"></span> {{ column.actionButton.text }}</button>\

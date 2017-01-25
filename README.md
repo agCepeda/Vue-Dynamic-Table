@@ -153,3 +153,22 @@ Esta columna se puede utilizar para imprimir informacion de forma personalizada.
 |**visible**|Indica si la columna sra visible|Boolean, Default(false)|
 |**customRender**|Funcion que debe retonar el contido a mostrar en la celda|Function(row) -> String|
 
+######Input
+
+Esta columna muestra la informacion dentro de un input del tipo texto. El contenido del input esta enlazado con el objeto modelo por lo cual momento de editar el input estas editanto en el modelo.
+
+|Propiedad|Descripcion|Valores|
+|:---|:---|:---|
+|**name**|Es el nombre la propiedad del objeto fila que se mostrara|String|
+|**title**|Es el titulo a mostrar de la columna|String|
+|**visible**|Indica si la columna sra visible|Boolean, Default(false)|
+|**sorteable**|Indica si la columna puede ordenarse al dar click al titulo de la columna|Boolean|
+|**input**|Objeto que contiene las propiedades del input|Object|
+
+Propiedades del objeto input.
+
+|Propiedad|Descripcion|Valores|
+|:---|:---|:---|
+|**inputClass**|Es la clase que se le asigna al objeto input|String|
+|**placeHolder**|Es el texto que se muestra cuando el campo esta vacio|String|
+

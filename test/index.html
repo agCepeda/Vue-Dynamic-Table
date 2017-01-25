@@ -65,7 +65,17 @@
 		        			selectClass: 'form-control',
 		        			selectOptions: [ { value:1, text: 'Tu mama' }, { value:1, text: 'Tu hermana' } ]
 		        		}
-		        	}
+		        	},
+                    {
+                        title: 'Editar',
+                        visible: true,
+                        actionLink: {
+                            tag: 'movementEdit',
+                            text: 'Editar',
+                            iconClass:'glyphicon glyphicon-pencil',
+                            linkClass:' link-warning'
+                        }
+                    },
 		        ],
 		        myDataModel: [
 		        	{ col1: 'Value 1, 1', col2: 'Value 1, 2', col3: 'Value 1, 3', col4: 'Value 1, 4', cost: 10 },
